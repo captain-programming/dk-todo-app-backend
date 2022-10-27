@@ -12,6 +12,10 @@ app.use(express.json());
 app.use("/users", userRouter);
 app.use("/tasks", TaskRouter);
 
+app.get("/", (req,res)=>{
+	res.send("Welcome to DK Server");
+})
+
 app.listen(PORT, async()=>{
 	await dbConnect();
 	console.log("Server started at http://localhost:8080");
