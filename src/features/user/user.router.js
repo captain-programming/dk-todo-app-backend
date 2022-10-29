@@ -29,7 +29,7 @@ user.post("/login", async(req, res)=>{
 			return res.status(401).send("Invalid credentials");
 		};
 
-		res.send({message: "Login Success", token: "Not provide"});
+		res.send({message: "Login Success", userId: user._id});
 	}catch(e){
 		// console.log(e.message);
 		res.send(e.message);

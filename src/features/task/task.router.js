@@ -3,6 +3,7 @@ const TaskModel = require('./task.model');
 
 const  task= express.Router();
 
+//display
 task.get("/", async(req, res)=>{
 	const {userid} = req.headers;
 	if(!userid){
@@ -13,11 +14,12 @@ task.get("/", async(req, res)=>{
 		const tasks = await TaskModel.find({userid: userid});
 		return res.send(tasks);	
 	}catch(e){
-		console.log(e.message);
+		// console.log(e.message);
 		res.send(e.message);
 	};
 });
 
+//display per task
 task.get("/:id", async(req, res)=>{
 	const {id} = req.params;
 	const {userid} = req.headers;
@@ -30,10 +32,12 @@ task.get("/:id", async(req, res)=>{
 		const tasks = await TaskModel.find({userid: userid, _id: id});
 		return res.send(tasks);
 	}catch(e){
-		console.log(e.message);
+		// console.log(e.message);
 		res.send(e.message);
 	};
 });
+
+//create task
 task.post("/", async(req, res)=>{
 	const {task,important,urgent,completed} = req.body;
 	const {userid} = req.headers;
@@ -47,12 +51,14 @@ task.post("/", async(req, res)=>{
 		await taskCreate.save();
 		return res.send("Successfully task created");
 	} catch(e){
-		console.log(e.message);
+		// console.log(e.message);
 		res.send(e.message);
 	};
 	// console.log(userid);
 	
 });
+
+//delete task
 task.delete("/:id", async(req, res)=>{
 	const {id} = req.params;
 	const {userid} = req.headers;
@@ -65,7 +71,7 @@ task.delete("/:id", async(req, res)=>{
 		const taskDelete = await TaskModel.deleteOne({userid: userid, _id: id});
 		return res.send(taskDelete);
 	}catch(e){
-		console.log(e.message);
+		// console.log(e.message);
 		res.send(e.message);
 	};
 });
