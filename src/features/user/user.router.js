@@ -7,14 +7,14 @@ const user = express.Router();
 // 	res.send("Users");
 // });
 user.post("/signup", async(req, res)=>{
-	const {name, email, password} = req.body;
+	const {name, email, password, role} = req.body;
 	try{
-		const user = new UserModel({name, email, password});
+		const user = new UserModel({name, email, password, role});
 		// console.log(user);
 		await user.save();
 		res.send("User created successfylly");
 	}catch(e){
-		console.log(e.message);
+		// console.log(e.message);
 		res.send(e.message);
 	}
 });
@@ -31,7 +31,7 @@ user.post("/login", async(req, res)=>{
 
 		res.send({message: "Login Success", token: "Not provide"});
 	}catch(e){
-		console.log(e.message);
+		// console.log(e.message);
 		res.send(e.message);
 	}
 })
