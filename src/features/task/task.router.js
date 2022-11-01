@@ -39,7 +39,7 @@ task.get("/:id", async(req, res)=>{
 
 //create task
 task.post("/", async(req, res)=>{
-	const {task,important,urgent,completed} = req.body;
+	const {task,important,urgent,completed, date} = req.body;
 	const {userid} = req.headers;
 
 	if(!userid){
@@ -47,7 +47,7 @@ task.post("/", async(req, res)=>{
 	};
 
 	try{
-		const taskCreate = new TaskModel({task, important, urgent, completed, userid});
+		const taskCreate = new TaskModel({task, important, urgent, completed, userid, date});
 		await taskCreate.save();
 		return res.send("Successfully task created");
 	} catch(e){
